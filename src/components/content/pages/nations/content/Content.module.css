@@ -1,11 +1,13 @@
 .content {
     grid-area: content;
-    background-color: aquamarine;
+    background-color: #B3B3B3;
 }
 
 .warriorCard{
-    border: silver 2px solid;
+    border: #454347 2px solid;
     width: 256px;
+    background-color: #BEBEBE;
+    border-radius: 20px;
 }
 
 .annotation {

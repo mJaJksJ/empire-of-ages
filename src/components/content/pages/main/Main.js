@@ -7,7 +7,7 @@ const Main = function () {
         <div className={styleClasses.main}>
             <div className={styleClasses.img}>
                 <img
-                    src={'hello.png'}
+                    src={'/images/hello.png'}
                     alt={'hello-img'}/>
             </div>
             <br/>

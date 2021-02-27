@@ -5,7 +5,7 @@ const Header = function () {
     return (
         <header id={'footer'} className={styleClasses.footer}>
             <hr/>
-            <a href={'#'}>designed by mJaJksJ</a>
+            <a href={'https://github.com/mJaJksJ'}>designed by mJaJksJ</a>
         </header>
     );
 }

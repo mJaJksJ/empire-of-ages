@@ -1,18 +1,17 @@
 .navMenu ul {
     display: flex;
     margin: 0; /* Обнуляем значение отступов */
-    padding: 4px; /* Значение полей */
+    padding: 10px; /* Значение полей */
     text-align: center;
 }
 .navMenu ul li {
     display: inline; /* Отображать как строчный элемент */
     margin: 3px; /* Отступ слева */
-    border: 1px solid #000; /* Рамка вокруг текста */
-    padding: 3px; /* Поля вокруг текста */
+    padding: 5px; /* Поля вокруг текста */
     flex-basis: auto;
     flex-grow: 1;
-    background-color: cornsilk;
-
+    font-size: 25px;
+    font-weight: bold;
     transition-property: background-color;
     transition-duration: 1s;
 }
@@ -22,17 +21,19 @@
 
 .navMenu {
     grid-area: navmenu;
-    background-color: antiquewhite;
+    background-color: #DC965A;
     position: sticky;
     top: 60px;
 }
 
 .navMenu a {
-    color: Magenta;
+    color: #454347;
     text-decoration: none;
 
 }
 
 .navMenu a.active {
-    color: silver;
+    color: #242325;
+    text-decoration: underline;
+
 }

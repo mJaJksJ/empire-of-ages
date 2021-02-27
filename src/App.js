@@ -9,24 +9,30 @@ import {BrowserRouter} from "react-router-dom";
 
 
 function App(props) {
-  return (
-      <BrowserRouter>
-      <div className={styleClasses.App}>
-          <div className={styleClasses.theVoidLeft}>
+    return (
+        <BrowserRouter>
+            <div className={styleClasses.App}>
+                <div className={styleClasses.theVoidLeft}
+                     style={{
+                         textAlign: "center",
+                         position: "sticky",
+                         top: 100
+                     }}>
+                    <p><a href={'#header'}>up</a></p>
+                    <p><a href={'#footer'}>down</a></p>
+                </div>
+                <div className={styleClasses.theVoidLeft}>
 
-          </div>
-          <div className={styleClasses.theVoidLeft}>
-
-          </div>
-          <Header />
-          <Footer />
-          <NavMenu />
-          <Content nations={props.nations}/>
+                </div>
+                <Header/>
+                <Footer/>
+                <NavMenu/>
+                <Content nations={props.nations}/>
 
 
-      </div>
-      </BrowserRouter>
-  );
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

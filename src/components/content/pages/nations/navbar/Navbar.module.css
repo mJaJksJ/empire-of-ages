@@ -1,10 +1,25 @@
 .navbar {
     grid-area: navbar;
-    background-color: royalblue;
+    background-color: #BBB891;
 }
 
 .navbar div{
     position: sticky;
     top: 140px;
+}
+
+.navbar li{
+    list-style-type: none;
+}
+
+.navbar a {
+    color: #454347;
+    text-decoration: none;
+
+}
+
+.navbar a.active {
+    color: #242325;
+    text-decoration: underline;
 }
 

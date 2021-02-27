@@ -3,7 +3,7 @@ import React from 'react';
 import styleClasses from './Content.module.css';
 import Nations from "./pages/nations/Nations";
 import Classes from "./pages/classes/Classes";
-import {BrowserRouter, Route} from "react-router-dom"
+import {Route} from "react-router-dom"
 import Forum from "./pages/forum/Forum";
 import Main from "./pages/main/Main";
 

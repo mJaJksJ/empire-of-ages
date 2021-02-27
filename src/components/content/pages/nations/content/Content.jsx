@@ -1,17 +1,37 @@
 import React from 'react'
 import styleClasses from './Content.module.css'
+import {NavLink} from "react-router-dom";
 
 const Content = function (props) {
-    return (
-        <div className={styleClasses.content}>
-            <div>
-                {Annotation(props.nation.warriors)}
+    if (props.nation.warriors === undefined) {
+        return (
+            <div className={styleClasses.content}
+                 style={
+                     {
+                         fontSize: 22,
+                         textAlign: "center"
+                     }
+                 }>
+                <p style={
+                    {margin: 25}
+                }>There you can see any information about nations
+                    such as <em>warriors</em>, <em>builds</em> e.t.c</p>
+                {NationIcons(props.nation)}
             </div>
-            <div className={styleClasses.warriors}>
-                {ShowWarriors(props.nation.warriors)}
+        );
+    } else {
+        return (
+            <div className={styleClasses.content}>
+                <div>
+                    {Annotation(props.nation.warriors)}
+                </div>
+                <div className={styleClasses.warriors}>
+                    {ShowWarriors(props.nation.warriors)}
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+
 }
 
 export default Content
@@ -41,7 +61,7 @@ const ShowWarriors = function (warriors) {
                 </div>
                 <div>
                     <img src={warriors[i].picture}
-                         alt={`${warriors[i].name} picture`}
+                         alt={`${warriors[i].picture}`}
                     />
                 </div>
                 <div>
@@ -72,4 +92,15 @@ const Annotation = function (warriors) {
         </div>
     )
     return ret;
+}
+
+const NationIcons = function (nations) {
+    const lst = [];
+    for (let nat in nations) {
+        lst.push(<NavLink to={`/Nations/${nat}`}>
+                <img src={`/images/${nat}/flag.png`} alt={`images/${nat}/flag.png`}/>
+            </NavLink>
+        );
+    }
+    return <div>{lst}</div>;
 }

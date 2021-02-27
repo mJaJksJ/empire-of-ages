@@ -3,7 +3,7 @@ const nations = {
         "warriors": [
             {
                 "name": "Eagle",
-                "picture": "https://sun9-10.userapi.com/impg/psF1SZ-eOxDI7rXbV7KAup4YyfkB5ILIfeolGQ/pQTrsgMrIPo.jpg?size=256x256&quality=96&proxy=1&sign=683f57a745f62d8cd116495ae4f12582&type=album",
+                "picture": "/images/Aztec/Eagle.png",
                 "classes": [
                     "Infantry", "Spearman"
                 ],
@@ -13,7 +13,7 @@ const nations = {
             },
             {
                 "name": "Jaguar",
-                "picture": "https://sun9-14.userapi.com/impg/HEHedvchXBobHgPkzKY8dGn1yh_DKGJveJ2G9Q/XGD_PcbS9Kc.jpg?size=256x256&quality=96&proxy=1&sign=4197aad1538b4fc0611bfa8a02a6d1cd&type=album",
+                "picture": "/images/Aztec/Jaguar.png",
                 "classes": [
                     "Infantry"
                 ],
@@ -23,7 +23,7 @@ const nations = {
             },
             {
                 "name": "Plumed",
-                "picture": "https://sun9-52.userapi.com/impg/H5Xv8s5av-1zUU8MRxSqZS2abKzRQ6k3uOE_CQ/deNWOFMTHck.jpg?size=256x256&quality=96&proxy=1&sign=1854b7c4c310a5e76e84d43cb2775f4a&type=album",
+                "picture": "/images/Aztec/Plumed.png",
                 "classes": [
                     "Infantry", "Archer"
                 ],
@@ -37,7 +37,7 @@ const nations = {
         "warriors": [
             {
                 "name": "Elephant",
-                "picture": "https://static.wikia.nocookie.net/ageofempires/images/a/ab/WarElephantIcon-DE.png/revision/latest?cb=20191230145604",
+                "picture": "/images/Persian/Elephant.png",
                 "classes": [
                     "Cavalry"
                 ],

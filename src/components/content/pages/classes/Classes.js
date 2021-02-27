@@ -9,7 +9,7 @@ const Classes = function () {
                 There will be "Classes guide"
             </div>
             <div className={styleClasses.gear}>
-                <img src={'gear.png'} alt={'work in progress'} />
+                <img src={'images/gear.png'} alt={'work in progress'} />
             </div>
         </div>
     );
