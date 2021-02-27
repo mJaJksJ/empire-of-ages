@@ -1,0 +1,23 @@
+.App {
+    display: grid;
+    min-height: 100vh;
+    grid-template-areas:
+            "header header header"
+            "theVoidL navmenu theVoidR"
+            "theVoidL content theVoidR"
+            "footer footer footer";
+    grid-template-rows: 60px 60px 1fr 60px;
+    grid-template-columns: 1fr 1030px 1fr;
+    grid-gap: 10px;
+
+    background-color: darkkhaki;
+}
+
+.the-void-left {
+    grid-area: theVoidL;
+}
+
+.the-void-right {
+    grid-area: theVoidR;
+}
+

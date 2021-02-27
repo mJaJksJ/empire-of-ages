@@ -1,0 +1,36 @@
+.classes {
+    display: grid;
+    grid-template-areas:
+            "navbar content";
+    grid-template-rows: 1fr;
+    grid-template-columns: 170px 850px;
+    grid-gap: 10px;
+
+    background-color: darkolivegreen;
+}
+
+.gear img{
+    animation: gear-spin infinite 10s linear;
+}
+
+.gear{
+    animation: gear-move infinite 10s linear;
+}
+
+@keyframes gear-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes gear-move {
+    from {
+        transform: translate(0%);
+    }
+    to {
+        transform: translate(80%);
+    }
+}

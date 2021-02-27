@@ -1,0 +1,22 @@
+.content {
+    grid-area: content;
+    background-color: aquamarine;
+}
+
+.warriorCard{
+    border: silver 2px solid;
+    width: 256px;
+}
+
+.annotation {
+    border: gold 2px solid;
+    width: 80%;
+}
+
+.warriors {
+    border: black 4px solid;
+}
+
+.warriors div {
+    margin: 10px auto;
+}

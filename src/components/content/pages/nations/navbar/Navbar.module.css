@@ -1,0 +1,10 @@
+.navbar {
+    grid-area: navbar;
+    background-color: royalblue;
+}
+
+.navbar div{
+    position: sticky;
+    top: 140px;
+}
+

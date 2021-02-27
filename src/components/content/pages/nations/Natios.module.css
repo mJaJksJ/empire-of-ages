@@ -1,0 +1,12 @@
+.nations {
+    display: grid;
+    min-height: 100%;
+    grid-template-areas:
+            "navbar content";
+    grid-template-rows: 1fr;
+    grid-template-columns: 170px 850px;
+    grid-gap: 10px;
+
+    background-color: darkolivegreen;
+}
+

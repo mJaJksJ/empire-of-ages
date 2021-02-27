@@ -1,0 +1,38 @@
+.navMenu ul {
+    display: flex;
+    margin: 0; /* Обнуляем значение отступов */
+    padding: 4px; /* Значение полей */
+    text-align: center;
+}
+.navMenu ul li {
+    display: inline; /* Отображать как строчный элемент */
+    margin: 3px; /* Отступ слева */
+    border: 1px solid #000; /* Рамка вокруг текста */
+    padding: 3px; /* Поля вокруг текста */
+    flex-basis: auto;
+    flex-grow: 1;
+    background-color: cornsilk;
+
+    transition-property: background-color;
+    transition-duration: 1s;
+}
+.navMenu ul li :hover{
+    background-color: navajowhite;
+}
+
+.navMenu {
+    grid-area: navmenu;
+    background-color: antiquewhite;
+    position: sticky;
+    top: 60px;
+}
+
+.navMenu a {
+    color: Magenta;
+    text-decoration: none;
+
+}
+
+.navMenu a.active {
+    color: silver;
+}

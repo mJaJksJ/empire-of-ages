@@ -1,0 +1,9 @@
+.footer {
+    grid-area: footer;
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+.footer img {
+    height: 50px;
+}
