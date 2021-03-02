@@ -1,13 +1,13 @@
 import React from 'react'
 import styleClasses from './Footer.module.css'
 
-const Header = function () {
+const Footer = function () {
     return (
-        <header id={'footer'} className={styleClasses.footer}>
+        <footer id={'footer'} className={styleClasses.footer}>
             <hr/>
             <a href={'https://github.com/mJaJksJ'}>designed by mJaJksJ</a>
-        </header>
+        </footer>
     );
 }
 
-export default Header;
+export default Footer;

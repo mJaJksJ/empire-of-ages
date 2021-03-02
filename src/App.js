@@ -16,17 +16,27 @@ function App(props) {
                      style={{
                          textAlign: "center",
                          position: "sticky",
-                         top: 100
+                         top: 50,
                      }}>
-                    <p><a href={'#header'}>up</a></p>
-                    <p><a href={'#footer'}>down</a></p>
+                    <p><a
+                        style={{
+                            textDecoration: "none",
+                            color: "#B3B3B3"
+                        }}
+                        href={'#up'}>up</a></p>
+                    <p><a
+                        style={{
+                            textDecoration: "none",
+                            color: "#B3B3B3"
+                        }}
+                        href={'#footer'}>down</a></p>
                 </div>
                 <div className={styleClasses.theVoidLeft}>
 
                 </div>
                 <Header/>
                 <Footer/>
-                <NavMenu/>
+                <NavMenu nations={props.nations}/>
                 <Content nations={props.nations}/>
 
 

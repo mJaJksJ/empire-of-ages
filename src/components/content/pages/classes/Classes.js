@@ -1,5 +1,4 @@
 import React from 'react'
-
 import styleClasses from './Classes.module.css'
 
 const Classes = function () {
@@ -11,6 +10,8 @@ const Classes = function () {
             <div className={styleClasses.gear}>
                 <img src={'images/gear.png'} alt={'work in progress'} />
             </div>
+
+
         </div>
     );
 }

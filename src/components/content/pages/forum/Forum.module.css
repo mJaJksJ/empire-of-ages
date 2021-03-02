@@ -1,3 +1,41 @@
 .forum {
+    display: grid;
+    /*grid-template-areas:
+            "navbar content";
+    grid-template-rows: 1fr;
+    grid-template-columns: 170px 850px;
+    grid-gap: 10px;*/
+
+    text-align: center;
+    font-size: 32px;
+}
+
+.gear img{
+    animation: gear-spin infinite 10s linear;
+}
+
+.gear{
+    animation: gear-move infinite 15s linear;
+    text-align: center;
 
 }
+
+@keyframes gear-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes gear-move {
+    from {
+        transform: translate(-100%);
+    }
+    to {
+        transform: translate(100%);
+    }
+}
+
+

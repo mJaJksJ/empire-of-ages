@@ -15,7 +15,7 @@ const Content = function (props) {
                 <p style={
                     {margin: 25}
                 }>There you can see any information about nations
-                    such as <em>warriors</em>, <em>builds</em> e.t.c</p>
+                    such as <em>warriors</em>, <em>builds</em> (in future) e.t.c</p>
                 {NationIcons(props.nation)}
             </div>
         );
@@ -64,7 +64,7 @@ const ShowWarriors = function (warriors) {
                          alt={`${warriors[i].picture}`}
                     />
                 </div>
-                <div>
+                <div style={{marginLeft: 20}}>
                     <p><strong>Classes</strong></p>
                     {classesLst(warriors[i].classes)}
                     <p><strong>Speed: </strong>{warriors[i].speed}</p>
@@ -87,8 +87,10 @@ const Annotation = function (warriors) {
     }
     let ret = (
         <div className={styleClasses.annotation}>
-            <p><h4>Annotation</h4></p>
-            <ol>{lst}</ol>
+            <div>
+                <p><h4>Annotation</h4></p>
+                <ol>{lst}</ol>
+            </div>
         </div>
     )
     return ret;

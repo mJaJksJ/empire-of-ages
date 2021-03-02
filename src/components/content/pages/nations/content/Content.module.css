@@ -4,21 +4,48 @@
 }
 
 .warriorCard{
-    border: #454347 2px solid;
+    border: #454347 3px solid;
     width: 256px;
     background-color: #BEBEBE;
     border-radius: 20px;
+    color: #454347;
+
 }
 
 .annotation {
-    border: gold 2px solid;
-    width: 80%;
+    border: #DC965A 4px inset;
+    background-color: #BEBEBE;
+    border-radius: 20px;
+    margin: 15px;
 }
 
-.warriors {
-    border: black 4px solid;
+.annotation div{
+    margin-left: 5%
 }
 
 .warriors div {
     margin: 10px auto;
+}
+
+.annotation a {
+    text-decoration: none;
+    color: #454347;
+}
+
+.annotation div ol li {
+    color: #454347;
+    font-size: 18px;
+}
+
+.annotation div {
+    color: #242325;
+}
+
+.annotation ol li:hover{
+    text-decoration-line: underline;
+
+}
+
+.annotation p {
+    font-size: 24px;
 }

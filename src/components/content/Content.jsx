@@ -11,6 +11,7 @@ const Content = function (props) {
     return (
 
         <div className={styleClasses.Content}>
+            <span id={'up'}></span>
             <Route path={'/Main'} component={Main}/>
 
             <Route path={'/Nations'} render={() => (<Nations nations={props.nations} />)}/>

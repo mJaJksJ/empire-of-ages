@@ -1,12 +1,13 @@
 .classes {
     display: grid;
-    grid-template-areas:
+    /*grid-template-areas:
             "navbar content";
     grid-template-rows: 1fr;
     grid-template-columns: 170px 850px;
-    grid-gap: 10px;
+    grid-gap: 10px;*/
 
-    background-color: darkolivegreen;
+    text-align: center;
+    font-size: 32px;
 }
 
 .gear img{
@@ -14,7 +15,9 @@
 }
 
 .gear{
-    animation: gear-move infinite 10s linear;
+    animation: gear-move infinite 15s linear;
+    text-align: center;
+
 }
 
 @keyframes gear-spin {
@@ -28,9 +31,11 @@
 
 @keyframes gear-move {
     from {
-        transform: translate(0%);
+        transform: translate(-100%);
     }
     to {
-        transform: translate(80%);
+        transform: translate(100%);
     }
 }
+
+
