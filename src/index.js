@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.js';
 import reportWebVitals from './reportWebVitals';
-import nationss from "./states/Nations";
-
-const nations = nationss;
+import nations from "./states/Nations";
+import news from "./states/News"
 
 ReactDOM.render(
   <React.StrictMode>
-    <App nations={nations}/>
+    <App nations={nations} news={news}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

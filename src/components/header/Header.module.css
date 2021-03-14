@@ -6,7 +6,28 @@
     top: 0;
 }
 
-.header img {
-    height: 70%;
+.header div img {
+    height: 30px;
+}
+
+.header div {
     margin: 9px;
+    padding-top: 9px;
+}
+
+.button {
+    border: #BBB891 3px outset;
+    margin: 5px;
+    padding: 5px;
+    background-color: #BBB891;
+    border-radius: 5px;
+}
+
+.button a {
+    color: #454347;
+    text-decoration: none;
+}
+
+.button:active{
+    border: #BBB891 3px inset;
 }

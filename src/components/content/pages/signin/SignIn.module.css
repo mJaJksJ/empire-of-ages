@@ -1,0 +1,46 @@
+.SignIn {
+    text-align: center;
+
+}
+
+.SignIn form {
+    /*border: red 2px solid;*/
+    border: #DC965A 4px inset;
+    background-color: #BEBEBE;
+    border-radius: 20px;
+    margin-left: 25%;
+    width: 50%;
+}
+
+.button {
+    margin: 5px;
+    width: 70px;
+}
+
+.SignIn h2 {
+    color: #242325;
+}
+
+.SignIn input {
+    background-color: #CFCFCF;
+}
+
+.SignIn input:required:valid {
+    border-color: #A1FFA1;
+}
+
+.SignIn input:invalid {
+    border-color: #FF7F7F;
+}
+
+.SignIn input:focus{
+    outline: none;
+}
+.SignIn input:required:valid:focus {
+    border-color: #242325;
+    background-color: #A1FFA1;
+}
+.SignIn input:invalid:focus {
+    border-color: #242325;
+    background-color: #FF7F7F;
+}

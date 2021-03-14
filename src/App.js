@@ -37,7 +37,7 @@ function App(props) {
                 <Header/>
                 <Footer/>
                 <NavMenu nations={props.nations}/>
-                <Content nations={props.nations}/>
+                <Content nations={props.nations} news={props.news}/>
 
 
             </div>
