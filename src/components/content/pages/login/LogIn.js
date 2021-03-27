@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 
 import styleClasses from './LogIn.module.css'
+import ReactDOM from "react-dom";
 
 class LogIn extends Component {
     patterns = {
@@ -13,58 +14,157 @@ class LogIn extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {password: "", nameMes: ".", surnameMes: ".", loginMes: ".", emailMes: ".", passwordMes: "."};
+        this.state = {
+            password: "",
+            nameMes: ".",
+            surnameMes: ".",
+            birthdayMes: ".",
+            loginMes: ".",
+            emailMes: ".",
+            passwordMes: ".",
+            nameValid: false,
+            surnameValid: false,
+            birthdayValid: false,
+            loginValid: false,
+            emailValid: false,
+            passwordValid: false,
+            repeatPasswordValid: false
+        };
         this.updateNameMes = this.updateNameMes.bind(this);
         this.updateSurnameMes = this.updateSurnameMes.bind(this);
         this.updateLoginMes = this.updateLoginMes.bind(this);
         this.updateEmailMes = this.updateEmailMes.bind(this);
         this.updatePasswordMes = this.updatePasswordMes.bind(this);
         this.updatePassword = this.updatePassword.bind(this);
+        this.onClickSubmit = this.onClickSubmit.bind(this);
+        this.onClickReset = this.onClickReset.bind(this);
+        this.updateRepeatPassword = this.updateRepeatPassword.bind(this);
+        this.updateBirthday = this.updateBirthday.bind(this);
     };
 
-    updateNameMes(e) {
-        if (e.target.value.length < 1 + 1 || e.target.value.length > 20 + 1) {
-            this.setState({nameMes: "Name must have "})
-        } else if (!this.patterns.name.test(e.target.value)) {
-            this.setState({nameMes: "Name must begin with upper and other must be lower, only letters"})
+    onClickSubmit(e) {
+        if (this.state.nameValid && this.state.surnameValid && this.state.birthdayValid && this.state.loginValid &&
+            this.state.emailValid && this.state.passwordValid && this.state.repeatPasswordValid) {
+            let form = ReactDOM.findDOMNode(this);
+            if (form instanceof HTMLElement) {
+                const child = form.getElementsByTagName('form');
+                child[0].submit();
+            }
         } else {
-            this.setState({nameMes: "."})
+            alert("Fill the fields correctly");
+        }
+    }
+
+    onClickReset(e) {
+        let form = ReactDOM.findDOMNode(this);
+        if (form instanceof HTMLElement) {
+            const child = form.getElementsByTagName('form');
+            child[0].reset();
+        }
+    }
+
+    updateNameMes(e) {
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+            child = form.getElementsByTagName('input');
+            child[0].setCustomValidity("Error");
+        }
+        if (e.target.value.length < 1 + 1 || e.target.value.length > 20 + 1) {
+            this.setState({
+                nameMes: "Name must have 2..21 syms",
+                nameValid: false
+            })
+        } else if (!this.patterns.name.test(e.target.value)) {
+            this.setState({
+                nameMes: "Name must begin with upper and other must be lower, only letters",
+                nameValid: false
+            })
+        } else {
+            this.setState({nameMes: ".", nameValid: true});
+            child[0].setCustomValidity("");
         }
     };
 
     updateSurnameMes(e) {
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+            child = form.getElementsByTagName('input');
+            child[1].setCustomValidity("Error");
+        }
         if (e.target.value.length < 1 + 1 || e.target.value.length > 20 + 1) {
-            this.setState({surnameMes: "Surname must have 2..21 syms"})
+            this.setState({
+                surnameMes: "Surname must have 2..21 syms",
+                surnameValid: false
+            })
         } else if (!this.patterns.surname.test(e.target.value)) {
-            this.setState({surnameMes: "Surname must have 2..21 syms"})
+            this.setState({
+                surnameMes: "Surname must begin with upper and other must be lower, only letters",
+                surnameValid: false
+            })
         } else {
-            this.setState({surnameMes: "."})
+            this.setState({surnameMes: ".", surnameValid: true});
+            child[1].setCustomValidity("");
         }
     };
 
     updateLoginMes(e) {
-        if (e.target.value.length < 1 + 1 || e.target.value.length > 20 + 1) {
-            this.setState({loginMes: "Login must have 4..10 syms"})
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+            child = form.getElementsByTagName('input');
+            child[3].setCustomValidity("Error");
+        }
+        if (e.target.value.length < 4 || e.target.value.length > 10) {
+            this.setState({
+                loginMes: "Login must have 4..10 syms",
+                loginValid: false
+            })
         } else if (!this.patterns.login.test(e.target.value)) {
-            this.setState({loginMes: "Login must have letters, nums, dot and underscore"})
+            this.setState({
+                loginMes: "Login must have letters, nums, dot and underscore",
+                loginValid: false
+            })
         } else {
-            this.setState({loginMes: "."})
+            this.setState({loginMes: ".", loginValid: true});
+            child[3].setCustomValidity("");
         }
     };
 
     updateEmailMes(e) {
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+            child = form.getElementsByTagName('input');
+            child[4].setCustomValidity("Error");
+        }
         if (!this.patterns.email.test(e.target.value)) {
-            this.setState({emailMes: "Email has name and domain name"})
+            this.setState({
+                emailMes: "Email has name and domain name",
+                emailValid: false
+            })
         } else {
-            this.setState({emailMes: "."})
+            this.setState({emailMes: ".", emailValid: true});
+            child[4].setCustomValidity("");
         }
     };
 
     updatePasswordMes(e) {
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+            child = form.getElementsByTagName('input');
+            child[5].setCustomValidity("Error");
+        }
         if (!this.patterns.password.test(e.target.value)) {
-            this.setState({passwordMes: "Password must have Upper letter, lower letter, nums and their more 8"})
+            this.setState({
+                passwordMes: "Password must have Upper letter, lower letter, nums and their more 8",
+                passwordValid: false
+            })
         } else {
-            this.setState({passwordMes: "."})
+            this.setState({passwordMes: ".", passwordValid: true});
+            child[5].setCustomValidity("");
         }
     };
 
@@ -73,67 +173,94 @@ class LogIn extends Component {
         this.setState({password: e.target.value});
     };
 
+    updateRepeatPassword(e) {
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+            child = form.getElementsByTagName('input');
+            child[6].setCustomValidity("Error");
+        }
+        if (this.state.password === e.target.value) {
+            this.setState({repeatPasswordValid: true});
+            child[6].setCustomValidity("");
+        } else {
+            this.setState({repeatPasswordValid: false})
+        }
+
+    }
+
+    updateBirthday(e) {
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+            child = form.getElementsByTagName('input');
+            child[2].setCustomValidity("Error");
+        }
+        if (e.target.value == null) {
+            this.setState({birthdayValid: false})
+        } else {
+            this.setState({birthdayValid: true})
+            child[2].setCustomValidity("");
+        }
+    }
+
     render() {
         return (
             <div className={styleClasses.LogIn}>
                 <h2>Registration form</h2>
-                <form method="get" action="/LogIn">
-                    <div>
-                        <input required type="text" name="name" placeholder={'name'}
-                               pattern={this.patterns.name.source} onChange={this.updateNameMes}/>
-                    </div>
-                    <div className={styleClasses.ValidMes}>
-                        {this.state.nameMes}
-                    </div>
-                    <div>
-                        <input required type="text" name="surname" placeholder={'surname'}
-                               pattern={this.patterns.surname.source} onChange={this.updateSurnameMes}/>
-                    </div>
-                    <div className={styleClasses.ValidMes}>
-                        {this.state.surnameMes}
-                    </div>
-                    <div>
-                        <input required type="date" name="birthday" placeholder={'birthday'}
-                               max={`${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()}`}/>
-                    </div>
-                    <div className={styleClasses.ValidMes}>
-                        .
-                    </div>
-                    <div>
-                        <input required type="text" name="login" placeholder={'login'}
-                               pattern={this.patterns.login.source} onChange={this.updateLoginMes}/>
-                    </div>
-                    <div className={styleClasses.ValidMes}>
-                        {this.state.loginMes}
-                    </div>
-                    <div>
-                        <input required type="email" name="email" placeholder={'email'}
-                               pattern={this.patterns.email.source} onChange={this.updateEmailMes}/>
-                    </div>
-                    <div className={styleClasses.ValidMes}>
-                        {this.state.emailMes}
-                    </div>
-                    <div>
-                        <input required type="password" name="password" placeholder={'password'}
-                               pattern={this.patterns.password.source} onChange={this.updatePassword}
-                        />
-                    </div>
-                    <div className={styleClasses.ValidMes}>
-                        {this.state.passwordMes}
-                    </div>
-                    <div>
-                        <input required type="password" name="password" placeholder={'repeat password'}
-                               pattern={this.state.password}/>
-
-                    </div>
-
-                    <p>
-                        <input type="submit" value="Log in" className={styleClasses.button}/>
-                        <input type="reset" value="Reset" className={styleClasses.button}/>
-                    </p>
-
-                </form>
-
+                <div className={styleClasses.LogInForm}>
+                    <form method="get" action="/LogIn" className={styleClasses.form} id={"form"}>
+                        <div>
+                            <input required type="text" name="name" placeholder={'name'}
+                                   onChange={this.updateNameMes}/>
+                        </div>
+                        <div className={styleClasses.ValidMes}>
+                            {this.state.nameMes}
+                        </div>
+                        <div>
+                            <input required type="text" name="surname" placeholder={'surname'}
+                                   onChange={this.updateSurnameMes}/>
+                        </div>
+                        <div className={styleClasses.ValidMes}>
+                            {this.state.surnameMes}
+                        </div>
+                        <div>
+                            <input required type="date" name="birthday" placeholder={'birthday'}
+                                   onChange={this.updateBirthday}/>
+                        </div>
+                        <div className={styleClasses.ValidMes}>
+                            {this.state.birthdayMes}
+                        </div>
+                        <div>
+                            <input required type="text" name="login" placeholder={'login'}
+                                   onChange={this.updateLoginMes}/>
+                        </div>
+                        <div className={styleClasses.ValidMes}>
+                            {this.state.loginMes}
+                        </div>
+                        <div>
+                            <input required type="email" name="email" placeholder={'email'}
+                                   onChange={this.updateEmailMes}/>
+                        </div>
+                        <div className={styleClasses.ValidMes}>
+                            {this.state.emailMes}
+                        </div>
+                        <div>
+                            <input required type="password" name="password" placeholder={'password'}
+                                   onChange={this.updatePassword}
+                            />
+                        </div>
+                        <div className={styleClasses.ValidMes}>
+                            {this.state.passwordMes}
+                        </div>
+                        <div>
+                            <input required type="password" name="password" placeholder={'repeat password'}
+                                   onChange={this.updateRepeatPassword}/>
+                        </div>
+                    </form>
+                    <button className={styleClasses.button} onClick={this.onClickSubmit}>Log in</button>
+                    <button className={styleClasses.button} onClick={this.onClickReset}>Reset</button>
+                </div>
             </div>
         )
     }

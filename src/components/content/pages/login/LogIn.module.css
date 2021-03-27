@@ -3,7 +3,7 @@
 
 }
 
-.LogIn form {
+.LogInForm {
     /*border: red 2px solid;*/
     border: #DC965A 4px inset;
     background-color: #BEBEBE;
@@ -15,6 +15,12 @@
 .button {
     margin: 5px;
     width: 70px;
+    border: #C8C8C8 2px outset;
+    background-color: #CFCFCF;
+}
+
+.button:active{
+    border-style: inset;
 }
 
 .LogIn h2 {
@@ -48,4 +54,8 @@
 .ValidMes{
     color: #FF7F7F;
     font-size: 14px;
+}
+
+.form{
+
 }
