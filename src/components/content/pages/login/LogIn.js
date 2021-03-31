@@ -3,13 +3,17 @@ import React, {Component} from 'react'
 import styleClasses from './LogIn.module.css'
 import ReactDOM from "react-dom";
 
+const checkDate = function(value){
+  return Date.parse(new Date()) > Date.parse(value);
+}
+
 class LogIn extends Component {
     patterns = {
-        name: /^[A-Z][a-z]{1,20}/,
-        surname: /^[A-Z][a-z]{1,20}/,
-        login: /[A-Za-z0-9._-]{4,10}/,
-        email: /.*@.*\..*/,
-        password: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}/
+        name: /[A-Z][a-z]{1,20}$/,
+        surname: /^[A-Z][a-z]{1,20}$/,
+        login: /^[A-Za-z0-9._-]{4,10}$/,
+        email: /.*@.*\...+$/,
+        password: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])^[0-9a-zA-Z]{8,}$/
     }
 
     constructor(props) {
@@ -28,7 +32,8 @@ class LogIn extends Component {
             loginValid: false,
             emailValid: false,
             passwordValid: false,
-            repeatPasswordValid: false
+            repeatPasswordValid: false,
+            submitdissable: true
         };
         this.updateNameMes = this.updateNameMes.bind(this);
         this.updateSurnameMes = this.updateSurnameMes.bind(this);
@@ -51,6 +56,7 @@ class LogIn extends Component {
                 child[0].submit();
             }
         } else {
+          
             alert("Fill the fields correctly");
         }
     }
@@ -70,12 +76,15 @@ class LogIn extends Component {
             child = form.getElementsByTagName('input');
             child[0].setCustomValidity("Error");
         }
+        if(e.target.value.length >= 2){
+          e.target.value = e.target.value[0].toUpperCase() + e.target.value.substr(1, e.target.value.length);
+        }
         if (e.target.value.length < 1 + 1 || e.target.value.length > 20 + 1) {
             this.setState({
                 nameMes: "Name must have 2..21 syms",
                 nameValid: false
             })
-        } else if (!this.patterns.name.test(e.target.value)) {
+        } else if (!this.patterns.name.test(e.target.value) ) {
             this.setState({
                 nameMes: "Name must begin with upper and other must be lower, only letters",
                 nameValid: false
@@ -92,6 +101,9 @@ class LogIn extends Component {
         if (form instanceof HTMLElement) {
             child = form.getElementsByTagName('input');
             child[1].setCustomValidity("Error");
+        }
+        if(e.target.value.length >= 2){
+          e.target.value = e.target.value[0].toUpperCase() + e.target.value.substr(1, e.target.value.length);
         }
         if (e.target.value.length < 1 + 1 || e.target.value.length > 20 + 1) {
             this.setState({
@@ -196,7 +208,7 @@ class LogIn extends Component {
             child = form.getElementsByTagName('input');
             child[2].setCustomValidity("Error");
         }
-        if (e.target.value == null) {
+        if (e.target.value == null || !checkDate(e.target.value)) {
             this.setState({birthdayValid: false})
         } else {
             this.setState({birthdayValid: true})
@@ -258,7 +270,7 @@ class LogIn extends Component {
                                    onChange={this.updateRepeatPassword}/>
                         </div>
                     </form>
-                    <button className={styleClasses.button} onClick={this.onClickSubmit}>Log in</button>
+                    <button className={styleClasses.button} onClick={this.onClickSubmit} >Log in</button>
                     <button className={styleClasses.button} onClick={this.onClickReset}>Reset</button>
                 </div>
             </div>
