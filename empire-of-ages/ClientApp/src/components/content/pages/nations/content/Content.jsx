@@ -97,7 +97,7 @@ const NationIcons = function (nations) {
     const lst = [];
     for (let nat in nations) {
         lst.push(<NavLink to={`/Nations/${nat}`}>
-                <img src={`/images/${nat}/flag.png`} alt={`images/${nat}/flag.png`}/>
+                <img src={`/images/${nat}/flag.png`} alt={`images/${nat}/Flag.png`}/>
             </NavLink>
         );
     }
