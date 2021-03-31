@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.js';
+import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 import nations from "./states/Nations";
 import news from "./states/News"

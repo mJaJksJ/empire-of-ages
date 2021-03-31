@@ -1,23 +1,19 @@
 import React, {Component} from 'react'
-
 import styleClasses from './LogIn.module.css'
 import ReactDOM from "react-dom";
 
-const checkDate = function(value){
-  return Date.parse(new Date()) > Date.parse(value);
-}
-
 class LogIn extends Component {
     patterns = {
-        name: /[A-Z][a-z]{1,20}$/,
+        name: /^[A-Z][a-z]{1,20}$/,
         surname: /^[A-Z][a-z]{1,20}$/,
         login: /^[A-Za-z0-9._-]{4,10}$/,
-        email: /.*@.*\...+$/,
+        email: /^.*@.*\...+$/,
         password: /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])^[0-9a-zA-Z]{8,}$/
     }
 
     constructor(props) {
         super(props);
+
         this.state = {
             password: "",
             nameMes: ".",
@@ -32,42 +28,23 @@ class LogIn extends Component {
             loginValid: false,
             emailValid: false,
             passwordValid: false,
-            repeatPasswordValid: false,
-            submitdissable: true
+            repeatPasswordValid: false
         };
+
         this.updateNameMes = this.updateNameMes.bind(this);
         this.updateSurnameMes = this.updateSurnameMes.bind(this);
+        this.updateBirthdayMes = this.updateBirthdayMes.bind(this);
         this.updateLoginMes = this.updateLoginMes.bind(this);
         this.updateEmailMes = this.updateEmailMes.bind(this);
         this.updatePasswordMes = this.updatePasswordMes.bind(this);
+
         this.updatePassword = this.updatePassword.bind(this);
+        this.updateRepeatPassword = this.updateRepeatPassword.bind(this);
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.onClickReset = this.onClickReset.bind(this);
-        this.updateRepeatPassword = this.updateRepeatPassword.bind(this);
-        this.updateBirthday = this.updateBirthday.bind(this);
+
+
     };
-
-    onClickSubmit(e) {
-        if (this.state.nameValid && this.state.surnameValid && this.state.birthdayValid && this.state.loginValid &&
-            this.state.emailValid && this.state.passwordValid && this.state.repeatPasswordValid) {
-            let form = ReactDOM.findDOMNode(this);
-            if (form instanceof HTMLElement) {
-                const child = form.getElementsByTagName('form');
-                child[0].submit();
-            }
-        } else {
-          
-            alert("Fill the fields correctly");
-        }
-    }
-
-    onClickReset(e) {
-        let form = ReactDOM.findDOMNode(this);
-        if (form instanceof HTMLElement) {
-            const child = form.getElementsByTagName('form');
-            child[0].reset();
-        }
-    }
 
     updateNameMes(e) {
         let form = ReactDOM.findDOMNode(this);
@@ -121,6 +98,21 @@ class LogIn extends Component {
         }
     };
 
+    updateBirthdayMes(e) {
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+            child = form.getElementsByTagName('input');
+            child[2].setCustomValidity("Error");
+        }
+        if (e.target.value == null || !(Date.parse(new Date()+"") > Date.parse(e.target.value))) {
+            this.setState({birthdayValid: false, birthdayMes: "Not earlier than now"})
+        } else {
+            this.setState({birthdayValid: true, birthdayMes: "."})
+            child[2].setCustomValidity("");
+        }
+    };
+
     updateLoginMes(e) {
         let form = ReactDOM.findDOMNode(this);
         let child;
@@ -163,6 +155,7 @@ class LogIn extends Component {
     };
 
     updatePasswordMes(e) {
+        this.updatePassword(e);
         let form = ReactDOM.findDOMNode(this);
         let child;
         if (form instanceof HTMLElement) {
@@ -181,7 +174,6 @@ class LogIn extends Component {
     };
 
     updatePassword(e) {
-        this.updatePasswordMes(e);
         this.setState({password: e.target.value});
     };
 
@@ -201,18 +193,25 @@ class LogIn extends Component {
 
     }
 
-    updateBirthday(e) {
-        let form = ReactDOM.findDOMNode(this);
-        let child;
-        if (form instanceof HTMLElement) {
-            child = form.getElementsByTagName('input');
-            child[2].setCustomValidity("Error");
-        }
-        if (e.target.value == null || !checkDate(e.target.value)) {
-            this.setState({birthdayValid: false})
+    onClickSubmit(e) {
+        if (this.state.nameValid && this.state.surnameValid && this.state.birthdayValid && this.state.loginValid &&
+            this.state.emailValid && this.state.passwordValid && this.state.repeatPasswordValid) {
+            let form = ReactDOM.findDOMNode(this);
+            if (form instanceof HTMLElement) {
+                const child = form.getElementsByTagName('form');
+                child[0].submit();
+            }
         } else {
-            this.setState({birthdayValid: true})
-            child[2].setCustomValidity("");
+
+            alert("Fill the fields correctly");
+        }
+    }
+
+    onClickReset(e) {
+        let form = ReactDOM.findDOMNode(this);
+        if (form instanceof HTMLElement) {
+            const child = form.getElementsByTagName('form');
+            child[0].reset();
         }
     }
 
@@ -221,7 +220,7 @@ class LogIn extends Component {
             <div className={styleClasses.LogIn}>
                 <h2>Registration form</h2>
                 <div className={styleClasses.LogInForm}>
-                    <form method="get" action="/LogIn" className={styleClasses.form} id={"form"}>
+                    <form method="get" action="/LogIn" className={styleClasses.form}>
                         <div>
                             <input required type="text" name="name" placeholder={'name'}
                                    onChange={this.updateNameMes}/>
@@ -238,7 +237,7 @@ class LogIn extends Component {
                         </div>
                         <div>
                             <input required type="date" name="birthday" placeholder={'birthday'}
-                                   onChange={this.updateBirthday}/>
+                                   onChange={this.updateBirthdayMes}/>
                         </div>
                         <div className={styleClasses.ValidMes}>
                             {this.state.birthdayMes}
@@ -259,7 +258,7 @@ class LogIn extends Component {
                         </div>
                         <div>
                             <input required type="password" name="password" placeholder={'password'}
-                                   onChange={this.updatePassword}
+                                   onChange={this.updatePasswordMes}
                             />
                         </div>
                         <div className={styleClasses.ValidMes}>
@@ -270,8 +269,10 @@ class LogIn extends Component {
                                    onChange={this.updateRepeatPassword}/>
                         </div>
                     </form>
-                    <button className={styleClasses.button} onClick={this.onClickSubmit} >Log in</button>
-                    <button className={styleClasses.button} onClick={this.onClickReset}>Reset</button>
+                    <p>
+                        <div className={styleClasses.button} onClick={this.onClickSubmit}>Sign in</div>
+                        <dib className={styleClasses.button} onClick={this.onClickReset}>Reset</dib>
+                    </p>
                 </div>
             </div>
         )

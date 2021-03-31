@@ -7,8 +7,9 @@ const NavMenu = function (props) {
         <header className={styleClasses.navMenu}>
             <ul>
                 <li><NavLink to='/Main' activeClassName={styleClasses.active}>Main</NavLink></li>
-                <li ><NavLink to='/Nations' activeClassName={styleClasses.active}>Nations</NavLink>
-                    {Subnations(props.nations)}
+                <li>
+                    <NavLink to='/Nations' activeClassName={styleClasses.active}>Nations</NavLink>
+                    {SubNations(props.nations)}
                 </li>
                 <li><NavLink to='/Classes' activeClassName={styleClasses.active}>Classes</NavLink></li>
                 <li><NavLink to='/Forum' activeClassName={styleClasses.active}>Forum</NavLink></li>
@@ -17,7 +18,7 @@ const NavMenu = function (props) {
     );
 }
 
-const Subnations = function (nations){
+const SubNations = function (nations){
     const lst = [];
     for (let nat in nations) {
         lst.push(<li><NavLink to={`/Nations/${nat}`} activeClassName={styleClasses.active}>{nat}</NavLink></li>);

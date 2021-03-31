@@ -7,7 +7,6 @@ import styleClasses from './App.module.css'
 import NavMenu from "./components/navMenu/NavMenu";
 import {BrowserRouter} from "react-router-dom";
 
-
 function App(props) {
     return (
         <BrowserRouter>
@@ -31,9 +30,7 @@ function App(props) {
                         }}
                         href={'#footer'}>down</a></p>
                 </div>
-                <div className={styleClasses.theVoidLeft}>
-
-                </div>
+                <div className={styleClasses.theVoidRight}> </div>
                 <Header/>
                 <Footer/>
                 <NavMenu nations={props.nations}/>

@@ -14,9 +14,12 @@
 
 .button {
     margin: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
     width: 70px;
     border: #C8C8C8 2px outset;
     background-color: #CFCFCF;
+    display: inline-block;
 }
 
 .button:active{

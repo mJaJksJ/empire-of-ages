@@ -34,8 +34,6 @@ const Content = function (props) {
 
 }
 
-export default Content
-
 const ShowWarriors = function (warriors) {
     const lst = [];
 
@@ -85,15 +83,14 @@ const Annotation = function (warriors) {
             <li><a href={'#' + warriors[i].name}>{warriors[i].name}</a></li>
         );
     }
-    let ret = (
+    return (
         <div className={styleClasses.annotation}>
             <div>
                 <p><h4>Annotation</h4></p>
                 <ol>{lst}</ol>
             </div>
         </div>
-    )
-    return ret;
+    );
 }
 
 const NationIcons = function (nations) {
@@ -106,3 +103,6 @@ const NationIcons = function (nations) {
     }
     return <div>{lst}</div>;
 }
+
+export default Content
+

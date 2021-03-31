@@ -3,7 +3,7 @@
 
 }
 
-.SignIn form {
+.SignInForm {
     /*border: red 2px solid;*/
     border: #DC965A 4px inset;
     background-color: #BEBEBE;
@@ -14,7 +14,16 @@
 
 .button {
     margin: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
     width: 70px;
+    border: #C8C8C8 2px outset;
+    background-color: #CFCFCF;
+    display: inline-block;
+}
+
+.button:active{
+    border-style: inset;
 }
 
 .SignIn h2 {
@@ -43,4 +52,8 @@
 .SignIn input:invalid:focus {
     border-color: #242325;
     background-color: #FF7F7F;
+}
+
+.form{
+
 }
