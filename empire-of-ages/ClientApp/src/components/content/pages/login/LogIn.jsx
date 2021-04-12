@@ -43,7 +43,7 @@ class LogIn extends Component {
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.onClickReset = this.onClickReset.bind(this);
 
-
+        this.onFormSubmit = this.onFormSubmit.bind(this);
     };
 
     updateNameMes(e) {
@@ -201,6 +201,7 @@ class LogIn extends Component {
                 const child = form.getElementsByTagName('form');
                 child[0].submit();
             }
+            this.onFormSubmit(e);
         } else {
 
             alert("Fill the fields correctly");
@@ -215,12 +216,42 @@ class LogIn extends Component {
         }
     }
 
+    onFormSubmit(e) {
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+          child = form.getElementsByTagName('input');
+        }
+
+        const data = new FormData();
+        data.append("Name", child[0].value);
+        data.append("Surname", child[1].value);
+        data.append("Birthday", child[2].value);
+        data.append("Nickname", child[3].value);
+        data.append("Email", child[4].value);
+        data.append("Password", child[5].value);
+        
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("post", "/Home/LoginNewUser", true);
+        xhr.send(data);
+
+        xhr = new XMLHttpRequest();
+        xhr.open("get", `/Home/GetResponseToLoginNewUser?login=${child[3].value}`, true);
+        xhr.onload = function () {
+            var data = JSON.parse(xhr.responseText);
+            alert(data);
+        }.bind(this);
+        xhr.send();
+
+    }
+
     render() {
         return (
             <div className={styleClasses.LogIn}>
                 <h2>Registration form</h2>
                 <div className={styleClasses.LogInForm}>
-                    <form method="get" action="/LogIn" className={styleClasses.form}>
+                    <form className={styleClasses.form}>
                         <div>
                             <input required type="text" name="name" placeholder={'name'}
                                    onChange={this.updateNameMes}/>
