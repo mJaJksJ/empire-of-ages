@@ -8,12 +8,15 @@ class SignIn extends Component {
         super(props);
         this.onClickSubmit = this.onClickSubmit.bind(this);
         this.onClickReset = this.onClickReset.bind(this);
+
+        this.onFormSubmit = this.onFormSubmit.bind(this);
     }
 
     onClickSubmit(e){
         let form = ReactDOM.findDOMNode(this);
         if (form instanceof HTMLElement) {
             const child = form.getElementsByTagName('form');
+            this.onFormSubmit();
             child[0].submit();
         }
     }
@@ -26,12 +29,28 @@ class SignIn extends Component {
         }
     }
 
+    onFormSubmit(e) {
+        let form = ReactDOM.findDOMNode(this);
+        let child;
+        if (form instanceof HTMLElement) {
+            child = form.getElementsByTagName('input');
+        }
+        let xhr = new XMLHttpRequest();
+        xhr.open("get", `/Home/GetResponseToSignInUser?login=${child[0].value}&password=${child[1].value}`, true);
+        xhr.onload = function () {
+            let data = JSON.parse(xhr.responseText);
+            alert(data);
+        }.bind(this);
+        xhr.send();
+
+    }
+
     render(){
         return (
         <div className={styleClasses.SignIn}>
             <h2>Sign in form</h2>
             <div className={styleClasses.SignInForm}>
-                <form method="get" action="/SignIn" className={styleClasses.form}>
+                <form className={styleClasses.form}>
                     <p>
                         <input required type="text" name="login" maxLength={20} placeholder={'login/email'}/>
                     </p>

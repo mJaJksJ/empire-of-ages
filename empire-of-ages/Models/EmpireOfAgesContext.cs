@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System.Text.Json;
-using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -26,8 +23,8 @@ namespace empire_of_ages
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer(new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("DefaultConnection"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-MFNAUQT\\SQLEXPRESS;Database=EmpireOfAges;Trusted_Connection=True;");
             }
         }
 
@@ -37,7 +34,9 @@ namespace empire_of_ages
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.Nickname);
+
+                entity.Property(e => e.Nickname).HasMaxLength(50);
 
                 entity.Property(e => e.Birthday).HasColumnType("date");
 
@@ -46,10 +45,6 @@ namespace empire_of_ages
                     .HasMaxLength(50);
 
                 entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Nickname)
                     .IsRequired()
                     .HasMaxLength(50);
 

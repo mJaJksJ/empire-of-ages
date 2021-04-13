@@ -199,9 +199,9 @@ class LogIn extends Component {
             let form = ReactDOM.findDOMNode(this);
             if (form instanceof HTMLElement) {
                 const child = form.getElementsByTagName('form');
+                this.onFormSubmit(e);
                 child[0].submit();
             }
-            this.onFormSubmit(e);
         } else {
 
             alert("Fill the fields correctly");
@@ -231,7 +231,7 @@ class LogIn extends Component {
         data.append("Email", child[4].value);
         data.append("Password", child[5].value);
         
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
 
         xhr.open("post", "/Home/LoginNewUser", true);
         xhr.send(data);
@@ -239,8 +239,8 @@ class LogIn extends Component {
         xhr = new XMLHttpRequest();
         xhr.open("get", `/Home/GetResponseToLoginNewUser?login=${child[3].value}`, true);
         xhr.onload = function () {
-            var data = JSON.parse(xhr.responseText);
-            alert(data);
+            let response = JSON.parse(xhr.responseText);
+            alert(response);
         }.bind(this);
         xhr.send();
 

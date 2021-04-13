@@ -18,55 +18,33 @@ namespace empire_of_ages.Controllers
 
         public IActionResult Index()
         {
-           /* db.Users.Add(new User()
-            {
-                Name = "WE",
-                Surname = "Er",
-                Birthday = DateTime.Today,
-                Nickname = "Werto",
-                Email = "aa@aga.ogo",
-                Password = "Ww222222"
-            });
-            db.SaveChanges();*/
             return View();
         }
 
-        /*public IActionResult Add()
-        {
-            return View();
-        }*/
 
         [HttpGet]
         public IEnumerable<bool> GetResponseToLoginNewUser(string login)
         {
-            return new List<bool>() { login.Length > 5 };
+            return new List<bool>() { db.Users.Where(x => x.Nickname.Equals(login)).Count() == 0 };
         }
 
         [HttpPost]
-        public IActionResult LoginNewUser(User user)
+        public async Task<IActionResult> LoginNewUser(User user)
         {
-            using (StreamWriter sw = new StreamWriter(@"C:/Users/maksi/Desktop/UsersData.txt", true, System.Text.Encoding.Default))
+            if (db.Users.Where(x => x.Nickname.Equals(user.Nickname)).Count() == 0)
             {
-                sw.WriteLine(user.Name);
-                sw.WriteLine(user.Surname);
-                sw.WriteLine(user.Birthday);
-                sw.WriteLine(user.Nickname);
-                sw.WriteLine(user.Email);
-                sw.WriteLine(user.Password);
+                db.Users.Add(user);
+                await db.SaveChangesAsync();
             }
-            //db.Users.Add(user);
-            //db.SaveChanges();
-            //return RedirectToAction("Index");
-            return Ok();
+            return RedirectToAction("Index");
         }
 
-        /*[HttpPost]
-        public async Task<IActionResult> Add(User user)
+
+        [HttpGet]
+        public IEnumerable<bool> GetResponseToSignInUser(string login, string password)
         {
-            db.Users.Add(user);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }*/
+            return new List<bool>() { db.Users.Where(x => ((x.Nickname.Equals(login) || x.Email.Equals(login)) && x.Password.Equals(password))).Count() != 0 };
+        }
 
     }
 }
