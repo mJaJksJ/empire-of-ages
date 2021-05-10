@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import styleClasses from './LogIn.module.css'
 import ReactDOM from "react-dom";
+import { Redirect } from "react-router-dom";
+import LoadingMes from "../../../../commonFuncs/LoadingMes";
 
 class LogIn extends Component {
     patterns = {
@@ -28,7 +30,9 @@ class LogIn extends Component {
             loginValid: false,
             emailValid: false,
             passwordValid: false,
-            repeatPasswordValid: false
+            repeatPasswordValid: false,
+            app: props.app,
+            mes: ""
         };
 
         this.updateNameMes = this.updateNameMes.bind(this);
@@ -196,15 +200,9 @@ class LogIn extends Component {
     onClickSubmit(e) {
         if (this.state.nameValid && this.state.surnameValid && this.state.birthdayValid && this.state.loginValid &&
             this.state.emailValid && this.state.passwordValid && this.state.repeatPasswordValid) {
-            let form = ReactDOM.findDOMNode(this);
-            if (form instanceof HTMLElement) {
-                const child = form.getElementsByTagName('form');
-                this.onFormSubmit(e);
-                child[0].submit();
-            }
+            this.onFormSubmit(e);
         } else {
-
-            alert("Fill the fields correctly");
+            this.setState({ mes: "Fill the fields correctly"})
         }
     }
 
@@ -222,91 +220,114 @@ class LogIn extends Component {
         if (form instanceof HTMLElement) {
           child = form.getElementsByTagName('input');
         }
+        this.setState({ mes: "creating..." });
 
-        const data = new FormData();
-        data.append("Name", child[0].value);
-        data.append("Surname", child[1].value);
-        data.append("Birthday", child[2].value);
-        data.append("Nickname", child[3].value);
-        data.append("Email", child[4].value);
-        data.append("Password", child[5].value);
+        /*const data = new FormData();
+        data.append("name", child[0].value);
+        data.append("surname", child[1].value);
+        data.append("birthday", child[2].value);
+        data.append("nickname", child[3].value);
+        data.append("email", child[4].value);
+        data.append("password", child[5].value);
+        data.append("team", "1");*/
+        let data = JSON.stringify({
+            name: child[0].value,
+            surname: child[1].value,
+            birthday: child[2].value,
+            nickname: child[3].value,
+            email: child[4].value,
+            password: child[5].value,
+            team: "1"
+        })
         
         let xhr = new XMLHttpRequest();
 
-        xhr.open("post", "/Home/LoginNewUser", true);
-        xhr.send(data);
-
-        xhr = new XMLHttpRequest();
-        xhr.open("get", `/Home/GetResponseToLoginNewUser?login=${child[3].value}`, true);
+        xhr.open("post", "/api/LogIn", true);
+        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
         xhr.onload = function () {
             let response = JSON.parse(xhr.responseText);
-            alert(response);
+            this.state.app.setState({
+                userName: response.nickname,
+                isAuthorize: response.isAuthorize,
+                userTeam: response.team,
+                userColor: response.color,
+            });
+            this.setState({ mes: response.errMes });
         }.bind(this);
-        xhr.send();
+        xhr.send(data);
 
     }
 
     render() {
-        return (
-            <div className={styleClasses.LogIn}>
-                <h2>Registration form</h2>
-                <div className={styleClasses.LogInForm}>
-                    <form className={styleClasses.form}>
+        if (!this.state.app.state.isAuthorize) {
+            return (
+                <div className={styleClasses.LogIn}>
+                    <h2>Registration form</h2>
+                    <div className={styleClasses.LogInForm}>
+                        <form className={styleClasses.form}>
+                            <div>
+                                <input required type="text" name="name" placeholder={'name'}
+                                    onChange={this.updateNameMes} />
+                            </div>
+                            <div className={styleClasses.ValidMes}>
+                                {this.state.nameMes}
+                            </div>
+                            <div>
+                                <input required type="text" name="surname" placeholder={'surname'}
+                                    onChange={this.updateSurnameMes} />
+                            </div>
+                            <div className={styleClasses.ValidMes}>
+                                {this.state.surnameMes}
+                            </div>
+                            <div>
+                                <input required type="date" name="birthday" placeholder={'birthday'}
+                                    onChange={this.updateBirthdayMes} />
+                            </div>
+                            <div className={styleClasses.ValidMes}>
+                                {this.state.birthdayMes}
+                            </div>
+                            <div>
+                                <input required type="text" name="login" placeholder={'login'}
+                                    onChange={this.updateLoginMes} />
+                            </div>
+                            <div className={styleClasses.ValidMes}>
+                                {this.state.loginMes}
+                            </div>
+                            <div>
+                                <input required type="email" name="email" placeholder={'email'}
+                                    onChange={this.updateEmailMes} />
+                            </div>
+                            <div className={styleClasses.ValidMes}>
+                                {this.state.emailMes}
+                            </div>
+                            <div>
+                                <input required type="password" name="password" placeholder={'password'}
+                                    onChange={this.updatePasswordMes}
+                                />
+                            </div>
+                            <div className={styleClasses.ValidMes}>
+                                {this.state.passwordMes}
+                            </div>
+                            <div>
+                                <input required type="password" name="password" placeholder={'repeat password'}
+                                    onChange={this.updateRepeatPassword} />
+                            </div>
+                            <div className={styleClasses.ValidMes}>
+                                {"."}
+                            </div>
+                        </form>
                         <div>
-                            <input required type="text" name="name" placeholder={'name'}
-                                   onChange={this.updateNameMes}/>
+                            <div className={styleClasses.button} onClick={this.onClickSubmit}>Log in</div>
+                            <div className={styleClasses.button} onClick={this.onClickReset}>Reset</div>
                         </div>
-                        <div className={styleClasses.ValidMes}>
-                            {this.state.nameMes}
-                        </div>
-                        <div>
-                            <input required type="text" name="surname" placeholder={'surname'}
-                                   onChange={this.updateSurnameMes}/>
-                        </div>
-                        <div className={styleClasses.ValidMes}>
-                            {this.state.surnameMes}
-                        </div>
-                        <div>
-                            <input required type="date" name="birthday" placeholder={'birthday'}
-                                   onChange={this.updateBirthdayMes}/>
-                        </div>
-                        <div className={styleClasses.ValidMes}>
-                            {this.state.birthdayMes}
-                        </div>
-                        <div>
-                            <input required type="text" name="login" placeholder={'login'}
-                                   onChange={this.updateLoginMes}/>
-                        </div>
-                        <div className={styleClasses.ValidMes}>
-                            {this.state.loginMes}
-                        </div>
-                        <div>
-                            <input required type="email" name="email" placeholder={'email'}
-                                   onChange={this.updateEmailMes}/>
-                        </div>
-                        <div className={styleClasses.ValidMes}>
-                            {this.state.emailMes}
-                        </div>
-                        <div>
-                            <input required type="password" name="password" placeholder={'password'}
-                                   onChange={this.updatePasswordMes}
-                            />
-                        </div>
-                        <div className={styleClasses.ValidMes}>
-                            {this.state.passwordMes}
-                        </div>
-                        <div>
-                            <input required type="password" name="password" placeholder={'repeat password'}
-                                   onChange={this.updateRepeatPassword}/>
-                        </div>
-                    </form>
-                    <p>
-                        <div className={styleClasses.button} onClick={this.onClickSubmit}>Sign in</div>
-                        <dib className={styleClasses.button} onClick={this.onClickReset}>Reset</dib>
-                    </p>
+                        {LoadingMes(this.state.mes, "red")}
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
+        else {
+            return <Redirect to="/" />;
+        }
     }
 }
 

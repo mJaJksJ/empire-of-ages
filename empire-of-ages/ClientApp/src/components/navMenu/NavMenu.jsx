@@ -21,7 +21,7 @@ const NavMenu = function (props) {
 const SubNations = function (nations){
     const lst = [];
     for (let nat in nations) {
-        lst.push(<li><NavLink to={`/Nations/${nat}`} activeClassName={styleClasses.active}>{nat}</NavLink></li>);
+        lst.push(<li key={`SubNations${nat}` }><NavLink to={`/Nations/${nat}`} activeClassName={styleClasses.active}>{nat}</NavLink></li>);
     }
     return <ul>{lst}</ul>;
 }

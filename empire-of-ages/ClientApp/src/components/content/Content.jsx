@@ -16,8 +16,8 @@ const Content = function (props) {
             <Route path={'/Nations'} render={() => (<Nations nations={props.nations} />)}/>
             <Route path={'/Classes'} component={Classes}/>
             <Route path={'/Forum'} component={Forum}/>
-            <Route path={'/SignIn'} component={SignIn}/>
-            <Route path={'/LogIn'} component={LogIn}/>
+            <Route path={'/SignIn'} render={() => (<SignIn app={props.app}/>)}/>
+            <Route path={'/LogIn'} render={() => (<LogIn app={props.app} />)}/>
         </div>
     );
 }
