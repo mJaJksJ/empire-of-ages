@@ -32,7 +32,19 @@ class App extends Component{
         this.setState({
             nations: nations,
             news: news
-        })
+        });
+        const xhr = new XMLHttpRequest();
+        xhr.open("get", `/api/UserStatus`, true);
+        xhr.onload = function () {
+            let data = JSON.parse(xhr.responseText);
+            this.state.app.setState({
+                userName: data.nickname,
+                isAuthorize: data.isAuthorize,
+                userTeam: data.team,
+                userColor: data.color,
+            });
+        }.bind(this);
+        xhr.send();
     }
 
     render(props) {

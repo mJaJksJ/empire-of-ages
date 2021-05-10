@@ -40,10 +40,10 @@ class Header extends Component {
         this.WololoGetTeam();
     }
 
-    WololoTeamApi(method) {
+    WololoTeamApi(method, login) {
         if (this.state.isAuthorize) {
             const xhr = new XMLHttpRequest();
-            xhr.open(method, `/api/UserTeam?login=Frog`, true);
+            xhr.open(method, `/api/UserTeam?login=${login}`, true);
             xhr.onload = function () {
                 let data = JSON.parse(xhr.responseText);
                 this.setState({
@@ -59,22 +59,11 @@ class Header extends Component {
         this.setState({
             mes: "wo-lo-looo..."
         })
-        this.WololoTeamApi("put");
+        this.WololoTeamApi("put", this.state.app.state.userName);
     }
 
     WololoGetTeam(e) {
-        if (this.state.isAuthorize) {
-            const xhr = new XMLHttpRequest();
-            xhr.open("get", `/api/UserTeam?login=Frog`, true);
-            xhr.onload = function () {
-                let data = JSON.parse(xhr.responseText);
-                this.setState({
-                    userColor: data.color
-                });
-                this.WololoFetTeam(e);
-            }.bind(this);
-            xhr.send();
-        }
+        this.WololoTeamApi("get", this.state.app.state.userName);
     }
 
     LogOut(e) {
@@ -83,7 +72,10 @@ class Header extends Component {
             isAuthorize: false,
             userTeam: -1,
             userColor: "#FFFFFF",
-        })
+        });
+        const xhr = new XMLHttpRequest();
+        xhr.open("get", `/api/LogOut`, true);
+        xhr.send();
     }
 
     AuthorizeDependence(e) {
@@ -100,7 +92,7 @@ class Header extends Component {
                 <div>
                     {LoadingMes(this.state.mes, "red")}
                     <span className={styleClasses.button} style={{color: this.state.userColor, cursor: "pointer"}}
-                        onClick={this.WololoUpdateTeam}>{this.state.userName}</span>
+                        onClick={this.WololoUpdateTeam }>{this.state.userName}</span>
                     <span className={styleClasses.button}><NavLink to='/SignIn' onClick={this.LogOut} > Log out</NavLink></span>
                 </div>
             );

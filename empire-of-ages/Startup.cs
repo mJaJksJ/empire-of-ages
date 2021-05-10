@@ -29,7 +29,7 @@ namespace empire_of_ages
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => //CookieAuthenticationOptions
                 {
-                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/LogIn");
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/SignIn");
                 });
 
             //services.AddControllersWithViews();

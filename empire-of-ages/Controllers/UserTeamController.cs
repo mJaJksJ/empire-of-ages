@@ -19,6 +19,7 @@ namespace empire_of_ages.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [ProducesResponseType(typeof(UserTeamContract), 200)]
         public async Task<IActionResult> ChangeUserTeam(string login)
         {
@@ -33,7 +34,7 @@ namespace empire_of_ages.Controllers
                 return Ok(new UserTeamContract{Team = user.Team, Color = Models.Color.color[user.Team], ErrMes=""});
             }
 
-            return Ok(new UserTeamContract{Team = -1, Color = "#FFFFFF", ErrMes = "Error" });
+            return Ok(new UserTeamContract{Team = -1, Color = "#FFFFFF", ErrMes = "" });
         }
 
         [HttpGet]
@@ -48,7 +49,7 @@ namespace empire_of_ages.Controllers
                 return Ok(new UserTeamContract{Team = user.Team, Color = Models.Color.color[user.Team], ErrMes = "" });
             }
 
-            return Ok(new UserTeamContract{Team = -1, Color = "#FFFFFF", ErrMes = "Error" });
+            return Ok(new UserTeamContract{Team = -1, Color = "#FFFFFF", ErrMes = "" });
         }
     }
 }

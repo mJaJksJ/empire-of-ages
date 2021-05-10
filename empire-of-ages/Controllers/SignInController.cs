@@ -30,10 +30,10 @@ namespace empire_of_ages.Controllers
             bool isAuthorizeSucces = users.Count() != 0;
             int team = isAuthorizeSucces ? users.First().Team : 0;
             string errMes = isAuthorizeSucces ? "" : "Неправильный логин или пароль";
-            /*if (isAuthorizeSucces)
+            if (isAuthorizeSucces)
             {
                 await Authenticate(login);
-            }*/
+            }
             return Ok(new AutorizeResponseContract { 
                 isAuthorize = isAuthorizeSucces, 
                 Nickname = login, 
