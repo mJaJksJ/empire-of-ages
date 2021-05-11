@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace empire_of_ages
+namespace empire_of_ages.Models
 {
     public partial class User
     {
@@ -13,6 +13,6 @@ namespace empire_of_ages
         public string Nickname { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public int Team { get; set; } = 0;
+        public int Team { get; set; }
     }
 }

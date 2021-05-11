@@ -30,8 +30,7 @@ class App extends Component{
 
     componentDidMount() {
         this.setState({
-            nations: nations,
-            news: news
+            nations: nations
         });
         const xhr = new XMLHttpRequest();
         xhr.open("get", `/api/UserStatus`, true);
@@ -45,6 +44,16 @@ class App extends Component{
             });
         }.bind(this);
         xhr.send();
+
+        const xhr2 = new XMLHttpRequest();
+        xhr2.open("get", `/api/News`, true);
+        xhr2.onload = function () {
+            let data = JSON.parse(xhr2.responseText);
+            this.setState({
+                news: data
+            });
+        }.bind(this);
+        xhr2.send();
     }
 
     render(props) {
