@@ -25,17 +25,24 @@ namespace empire_of_ages.Controllers
         public async Task<IActionResult> ChangeUserTeam(string login)
         {
             var users = db.Users.Where(x => x.Nickname.Equals(login));
+            var user = users.FirstOrDefault();
 
-            if (users.Count() != 0)
+            if (user != null)
             {
-                var user = users.First();
+                
                 user.Team = (user.Team + 1) % 8;
                 db.Users.Update(user);
                 await db.SaveChangesAsync();
-                return Ok(new UserTeamContract{Team = user.Team, Color = Models.Color.color[user.Team], ErrMes=""});
+            }
+            if (user != null)
+            {
+                return Ok(new UserTeamContract { Team = user.Team, Color = Models.Color.color[user.Team], ErrMes = "" });
+            }
+            else
+            {
+                return Ok(new UserTeamContract { Team = -1, Color = "#FFFFFF", ErrMes = "" });
             }
 
-            return Ok(new UserTeamContract{Team = -1, Color = "#FFFFFF", ErrMes = "" });
         }
 
         [HttpGet]

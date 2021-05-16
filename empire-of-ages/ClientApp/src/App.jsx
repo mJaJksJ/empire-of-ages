@@ -7,11 +7,9 @@ import styleClasses from './App.module.css'
 import NavMenu from "./components/navMenu/NavMenu";
 import {BrowserRouter} from "react-router-dom";
 import nations from "./states/Nations";
-import news from "./states/News"
+import Get from "./commonFuncs/ApiLongPoll"
 
 class App extends Component{
-
-
 
     constructor(props) {
         super(props);
@@ -32,18 +30,17 @@ class App extends Component{
         this.setState({
             nations: nations
         });
-        const xhr = new XMLHttpRequest();
-        xhr.open("get", `/api/UserStatus`, true);
-        xhr.onload = function () {
-            let data = JSON.parse(xhr.responseText);
-            this.state.app.setState({
-                userName: data.nickname,
-                isAuthorize: data.isAuthorize,
-                userTeam: data.team,
-                userColor: data.color,
-            });
-        }.bind(this);
-        xhr.send();
+        Get(
+            `/api/UserStatus`,
+            (data) => {
+                this.state.app.setState({
+                    userName: data.nickname,
+                    isAuthorize: data.isAuthorize,
+                    userTeam: data.team,
+                    userColor: data.color,
+                })
+            }
+        );
 
         const xhr2 = new XMLHttpRequest();
         xhr2.open("get", `/api/News`, true);

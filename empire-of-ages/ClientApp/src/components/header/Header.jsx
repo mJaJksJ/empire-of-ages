@@ -3,6 +3,7 @@ import styleClasses from './Header.module.css'
 import {NavLink} from "react-router-dom";
 import ReactDOM from "react-dom";
 import LoadingMes from "../../commonFuncs/LoadingMes";
+import Get from "../../commonFuncs/ApiLongPoll";
 
 class Header extends Component {
 
@@ -14,7 +15,8 @@ class Header extends Component {
             isAuthorize: props.app.state.isAuthorize,
             userName: props.app.state.userName,
             userColor: props.app.state.userColor,
-            mes: ""
+            mes: "",
+            header: this
         };
 
         this.WololoUpdateTeam = this.WololoUpdateTeam.bind(this);
@@ -63,7 +65,18 @@ class Header extends Component {
     }
 
     WololoGetTeam(e) {
-        this.WololoTeamApi("get", this.state.app.state.userName);
+        //this.WololoTeamApi("get", this.state.app.state.userName);
+        Get(
+            `/api/UserTeam?login=${this.state.app.state.userName}`,
+            (data) => {
+                if (data.color !== "#FFFFFF") {
+                    this.setState({
+                        userColor: data.color,
+                        mes: data.errMes
+                    });
+                }
+            }
+        );
     }
 
     LogOut(e) {
