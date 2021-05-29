@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import Header from "../../../header/Header";
 import { Redirect } from "react-router-dom";
 import LoadingMes from "../../../../commonFuncs/LoadingMes";
+import Encript from "../../../../commonFuncs/Encript";
 
 class SignIn extends Component {
 
@@ -48,7 +49,7 @@ class SignIn extends Component {
         this.setState({
             mes: "Loading..."
         });
-        xhr.open("get", `/api/SignIn?login=${child[0].value}&password=${child[1].value}`, true);
+        xhr.open("get", `/api/SignIn?login=${child[0].value}&password=${Encript(child[1].value)}`, true);
         xhr.onload = function () {
             let data = JSON.parse(xhr.responseText);
             this.state.app.setState({

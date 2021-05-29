@@ -3,6 +3,7 @@ import styleClasses from './LogIn.module.css'
 import ReactDOM from "react-dom";
 import { Redirect } from "react-router-dom";
 import LoadingMes from "../../../../commonFuncs/LoadingMes";
+import Encript from "../../../../commonFuncs/Encript";
 
 class LogIn extends Component {
     patterns = {
@@ -236,7 +237,7 @@ class LogIn extends Component {
             birthday: child[2].value,
             nickname: child[3].value,
             email: child[4].value,
-            password: child[5].value,
+            password: Encript(child[5].value),
             team: "1"
         })
         

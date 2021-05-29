@@ -24,6 +24,11 @@ namespace empire_of_ages
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<IISOptions>(options =>
+            {
+                options.AutomaticAuthentication = true;
+            });
+
             services.AddDbContext<EmpireOfAgesContext>(options => options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             // установка конфигурации подключения

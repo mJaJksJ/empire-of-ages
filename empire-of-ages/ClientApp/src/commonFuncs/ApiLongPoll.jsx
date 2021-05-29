@@ -1,6 +1,4 @@
-﻿import React from 'react';
-
-async function Get(url, operation) {
+﻿async function Get(url, operation) {
     let response = await fetch(url);
     if (response.status == 502) {
         await Get(url, operation);
